@@ -1,0 +1,25 @@
+spring:
+  freemarker:
+    request-context-attribute: request
+    expose-request-attributes: true
+    expose-session-attributes: true
+    expose-spring-macro-helpers: true
+    template-loader-path: classpath:/templates
+  redis:
+    host: localhost
+    port: 6379
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/aikan?useUnicode=yes&characterEncoding=UTF8
+    driver-class-name: com.mysql.jdbc.Driver
+server:
+  compression:
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain
+    min-response-size: 1024
+logging:
+  level:
+    com:
+      example:
+        demo: debug

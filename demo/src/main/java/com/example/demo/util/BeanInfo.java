@@ -1,5 +1,11 @@
-public class BeanInfoTest {
-    private static final String url = "jdbc:mysql://127.0.0.1/beaninfo";
+package com.example.demo.util;
+
+/**
+ * @author licoy.cn
+ * @version 2018/3/30
+ */
+public class BeanInfo {
+    /*private static final String url = "jdbc:mysql://127.0.0.1/beaninfo";
     private static final String name = "com.mysql.jdbc.Driver";
     private static final String user = "root";
     private static final String password = "root";
@@ -77,4 +83,5 @@ public class BeanInfoTest {
             e.printStackTrace();
         }
         return  result;
-    }
+    }*/
+}
