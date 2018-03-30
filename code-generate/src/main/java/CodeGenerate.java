@@ -1,7 +1,5 @@
 import bean.ConfigForProperties;
 import bean.TableEntity;
-import com.google.common.base.CaseFormat;
-import com.google.common.base.Strings;
 import com.google.common.io.Files;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -14,16 +12,16 @@ import java.util.*;
  * @author licoy.cn
  * @version 2018/3/29
  */
-public class Code {
+public class CodeGenerate {
 
     private static String classPath;
 
     {
-        classPath = Code.class.getClassLoader().getResource("").getPath();
+        classPath = CodeGenerate.class.getClassLoader().getResource("").getPath();
     }
 
     public static void main(String[] args) throws Exception {
-        new Code().run();
+        new CodeGenerate().run();
     }
 
     public void run() throws Exception {
@@ -45,38 +43,16 @@ public class Code {
     }
 
     private static void generateEntity(TableEntity entity,ConfigForProperties config,Configuration cfg) throws Exception{
-        String packageDir = config.getEntityPackage();
-        packageDir = packageDir.replaceAll("\\.","/");
-        String outPath = config.getProjectDirectory()+packageDir+File.separator+entity.getClassName()+".java";
-        File file = new File(outPath);
-        if(!file.exists()){
-            Files.createParentDirs(file);
-            file.createNewFile();
-        }
-        Writer writer = new FileWriter(outPath);
         Map<String,Object> map = new HashMap<>();
         map.put("entity",entity);
         map.put("config",config);
-        Template template = cfg.getTemplate("entity.ftl");
-        template.process(map,writer);
-        writer.flush();
+        write(config.getEntityPackage(),"","entity.ftl",entity,config,cfg,map);
         generateMapper(map,entity,config,cfg);
     }
 
     private static void generateMapper(Map<String,Object> map,TableEntity entity,ConfigForProperties config,
                                        Configuration cfg) throws Exception{
-        String packageDir = config.getMapperPackage();
-        packageDir = packageDir.replaceAll("\\.","/");
-        String outPath = config.getProjectDirectory()+packageDir+File.separator+entity.getClassName()+"Mapper.java";
-        File file = new File(outPath);
-        if(!file.exists()){
-            Files.createParentDirs(file);
-            file.createNewFile();
-        }
-        Writer writer = new FileWriter(outPath);
-        Template template = cfg.getTemplate("mapper.ftl");
-        template.process(map,writer);
-        writer.flush();
+        write(config.getMapperPackage(),"Mapper","mapper.ftl",entity,config,cfg,map);
         generateService(map,entity,config,cfg);
     }
 
