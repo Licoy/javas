@@ -93,8 +93,8 @@ public class CodeGenerate {
                 .serviceImplPackage(properties.getProperty("service-impl-package"))
                 .projectDirectory(properties.getProperty("project-directory"))
                 .dbDriveClass(properties.getProperty("db-driver-class"))
-                .dbPassword(properties.getProperty("db-username"))
-                .dbUsername(properties.getProperty("db-password"))
+                .dbUsername(properties.getProperty("db-username"))
+                .dbPassword(properties.getProperty("db-password"))
                 .dbUrl(properties.getProperty("db-url"))
                 .build();
     }
